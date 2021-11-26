@@ -7,6 +7,8 @@
 <body background="{% static 'img/background.jpg' %}">
 
 {% block title %}
+<h2>Средние баллы класса: </h2>
+<img class="avg_chart" src="{% static chart_avg %}"/>
 <h2>Ученики {{ grade.grade}} класса:</h2>
 {% endblock title %}
 
