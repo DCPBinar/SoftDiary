@@ -1,0 +1,95 @@
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/slider.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/range.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/tab.css' %}">
+    <script type="text/javascript" src="{% static 'js/range.js' %}"></script>
+</head>
+<body background="{% static 'img/background.jpg' %}">
+
+{% block title %}
+<h1>Профиль ученика {{ student }}:</h1>
+{% endblock title %}
+
+{% block content %}
+{% if stat %}
+<div class="adaptivny-slayder">
+    <input type="radio" name="kadoves" id="slaid1" checked>
+    <input type="radio" name="kadoves" id="slaid2">
+    <input type="radio" name="kadoves" id="slaid3">
+    <input type="radio" name="kadoves" id="slaid4">
+    <input type="radio" name="kadoves" id="slaid5">
+    <input type="radio" name="kadoves" id="slaid6">
+    <input type="radio" name="kadoves" id="slaid7">
+    <input type="radio" name="kadoves" id="slaid8">
+    <input type="radio" name="kadoves" id="slaid9">
+  <div class="kadoves">
+      <label for="slaid1"></label>
+      <label for="slaid2"></label>
+      <label for="slaid3"></label>
+      <label for="slaid4"></label>
+      <label for="slaid5"></label>
+      <label for="slaid6"></label>
+      <label for="slaid7"></label>
+      <label for="slaid8"></label>
+      <label for="slaid9"></label>
+  </div>
+
+  <div class="adaptivny-slayder-lasekun">
+      <div class="abusteku-deagulus">
+          <img src="{% static chart_1 %}"/>
+          <img src="{% static chart_2 %}"/>
+          <img src="{% static chart_3 %}"/>
+          <img src="{% static chart_4 %}"/>
+          <img src="{% static chart_5 %}"/>
+          <img src="{% static chart_6 %}"/>
+          <img src="{% static chart_7 %}"/>
+          <img src="{% static chart_8 %}"/>
+          <img src="{% static chart_9 %}"/>
+      </div>
+  </div>
+</div>
+{% else %}
+<h2> У этого ученика пока нет статистики </h2>
+{% endif %}
+{% if is_time %}
+<div class="tab">
+    <input id="tab-one" type="checkbox" name="tabs">
+    <label for="tab-one">Что такое REUM?</label>
+    <div class="tab-content">
+        <p>R - ученику требуется помощь для выполнения этого задания</p>
+        <p>E - ученик может самостоятельно выполнять задания по шаблону</p>
+        <p>U - ученик владеет навыком свободно</p>
+        <p>M - ученик может моделировать примеры и учить этому других</p>
+    </div>
+</div>
+<h2>Добавить отчет: </h2>
+<form method="post" action="{% url 'success' %}">
+    {% csrf_token %}
+    <div>
+        <h4>Целеполагание:<input name="criteria_1" id="range_1" type="range" min="1" max="4" list="list_1" value="1" onchange="change()"> <span id="range_value_1">&nbspR</span></h4>
+        <h4>Мотивация:<input name="criteria_2" id="range_2" type="range" min="1" max="4" list="list_1" value="1" onchange="change()"> <span id="range_value_2">&nbspR</span></h4>
+        <h4>Планирование:<input name="criteria_3" id="range_3" type="range" min="1" max="4" list="list_1" value="1" onchange="change()"> <span id="range_value_3">&nbspR</span></h4>
+        <h4>Системное мышление:<input name="criteria_4" id="range_4" type="range" min="1" max="4" list="list_1" value="1" onchange="change()"> <span id="range_value_4">&nbspR</span></h4>
+        <h4>Аналитическое мышление:<input name="criteria_5" id="range_5" type="range" min="1" max="4" list="list_1" value="1" onchange="change()"> <span id="range_value_5">&nbspR</span></h4>
+        <h4>Генерация идей:<input name="criteria_6" id="range_6" type="range" min="1" max="4" list="list_1" value="1" onchange="change()"> <span id="range_value_6">&nbspR</span></h4>
+        <h4>Применение информации:<input name="criteria_7" id="range_7" type="range" min="1" max="4" list="list_1"value="1" onchange="change()"> <span id="range_value_7">&nbspR</span></h4>
+        <h4>Коммуникативные навыки:<input name="criteria_8" id="range_8" type="range" min="1" max="4" list="list_1" value="1" onchange="change()"> <span id="range_value_8">&nbspR</span></h4>
+        <h4>Командная работа:<input name="criteria_9" id="range_9" type="range" min="1" max="4" list="list_1" value="1" onchange="change()"> <span id="range_value_9">&nbspR</span></h4>
+        <datalist id="list_1">
+            <option value="1">
+            <option value="2">
+            <option value="3">
+            <option value="4">
+        </datalist>
+    </div>
+    <h3><input type="image" class="report" src="{% static 'img/report.png'%}" title="Добавить отчет" align="center">
+    Добавить отчет</h3>
+    <script src="{% static 'js/range.js' %}"></script>
+</form>
+{% endif %}
+<a href="{% url 'grade' grade_id %}"><h3><img class='back' src="{% static 'img/back.png' %}" title="Назад" align="center"> Назад</h3></a>
+{% endblock content %}
+
+</body>

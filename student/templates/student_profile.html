@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/slider.css' %}">
+</head>
+<body bgcolor="#000" background="{% static 'img/background.jpg' %}">
+
+<h1 align="center">Добро пожаловать, {{ request.user.first_name }}</h1>
+
+{% if not request.user.student.test_passed %}
+<div align="center">
+    <a href="{% url 'test' %}"><h3><img class='test' src="{% static 'img/test.png' %}" title="Домой" align="center"> Пройти тест</h3></a>
+</div>
+{% endif %}
+
+{% if exist %}
+<h2 align="center">Ваша статистика:</h2>
+<div class="adaptivny-slayder">
+    <input type="radio" name="kadoves" id="slaid1" checked>
+    <input type="radio" name="kadoves" id="slaid2">
+    <input type="radio" name="kadoves" id="slaid3">
+    <input type="radio" name="kadoves" id="slaid4">
+    <input type="radio" name="kadoves" id="slaid5">
+    <input type="radio" name="kadoves" id="slaid6">
+    <input type="radio" name="kadoves" id="slaid7">
+    <input type="radio" name="kadoves" id="slaid8">
+    <input type="radio" name="kadoves" id="slaid9">
+  <div class="kadoves">
+      <label for="slaid1"></label>
+      <label for="slaid2"></label>
+      <label for="slaid3"></label>
+      <label for="slaid4"></label>
+      <label for="slaid5"></label>
+      <label for="slaid6"></label>
+      <label for="slaid7"></label>
+      <label for="slaid8"></label>
+      <label for="slaid9"></label>
+  </div>
+
+  <div class="adaptivny-slayder-lasekun">
+      <div class="abusteku-deagulus">
+          <img src="{% static chart_path_1 %}"/>
+          <img src="{% static chart_path_2 %}"/>
+          <img src="{% static chart_path_3 %}"/>
+          <img src="{% static chart_path_4 %}"/>
+          <img src="{% static chart_path_5 %}"/>
+          <img src="{% static chart_path_6 %}"/>
+          <img src="{% static chart_path_7 %}"/>
+          <img src="{% static chart_path_8 %}"/>
+          <img src="{% static chart_path_9 %}"/>
+      </div>
+  </div>
+</div>
+{% else %}
+<p>У вас пока нет оценок</p>
+{% endif %}
+
+<div align="center">
+    <a href="{% url 'home' %}"><h3><img class='home' src="{% static 'img/home.png' %}" title="Домой" align="center"> Домой</h3></a>
+</div>
+
+</body>
+</html>

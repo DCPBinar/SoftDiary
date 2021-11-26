@@ -1,0 +1,43 @@
+
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+
+<body bgcolor="#000" background="{% static 'img/background.jpg' %}">
+{% block content %}
+
+{% if next %}
+  {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+  {% else %}
+    <p>Please login to see this page.</p>
+  {% endif %}
+{% endif %}
+
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+<table>
+
+<tr>
+  <td>Имя пользователя:</td>
+  <td>{{ form.username }}</td>
+</tr>
+
+<tr>
+  <td>Пароль:</td>
+  <td>{{ form.password }}</td>
+</tr>
+</table>
+
+<h3><input type="image" class="login" src="{% static 'img/login.png' %}" title="Вход" align="center"> Вход</h3>
+<input type="hidden" name="next" value="{{ next }}" />
+</form>
+
+<!--{% if form.errors %}-->
+<!--  <p>Ошибка</p>-->
+<!--{% endif %}-->
+
+{% endblock %}
+</body>

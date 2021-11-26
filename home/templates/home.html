@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Homepage</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body background="{% static 'img/background.jpg' %}">
+<h1 align="center">Это домашняя страница</h1>
+<div align="center">
+    <h1>Здесь будет описание сайта</h1>
+    Значимость этих проблем настолько очевидна,
+    <br>что выбранный нами инновационный путь в значительной
+    <br>степени обуславливает создание экономической целесообразности
+    <br>принимаемых решений. Соображения высшего порядка, а также
+    <br>постоянный количественный рост и сфера нашей активности представляет
+    <br>собой интересный эксперимент проверки дальнейших направлений развития
+    <br>проекта! Практический опыт показывает, что начало повседневной работы по
+    <br>формированию позиции обеспечивает широкому кругу специалистов участие
+    <br>в формировании системы масштабного изменения ряда параметров.
+</div>
+
+{% if not request.user.is_authenticated %}
+<div align="center">
+    <form method="post" action="accounts/login/">
+        {% csrf_token %}
+        <h3><input type="image" class="login" src="{% static 'img/login.png' %}" title="Вход" align="center"> Вход</h3>
+    </form>
+</div>
+{% endif %}
+
+{% if request.user.is_authenticated %}
+<div align="center">
+    <form method="post" action="accounts/">
+        {% csrf_token %}
+        <h3><input type="image" class="send_profile" src="{% static 'img/profile.png' %}" alt="Личный кабинет" title="Личный кабинет" align="center">
+            Личный кабинет</h3>
+    </form>
+
+    <form method="post" action="accounts/logout/">
+        {% csrf_token %}
+        <h3><input type="image" class="logout" src="{% static 'img/logout.png' %}" title="Выход" align="center">
+            Выход</h3>
+    </form>
+</div>
+{% endif %}
+</body>
+</html>

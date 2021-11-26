@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+
+<body background="{% static 'img/background.jpg' %}">
+
+{% block title %}
+<h2>Ученики {{ grade.grade}} класса:</h2>
+{% endblock title %}
+
+{% block content %}
+{% for student in students %}
+{% if grade.id == student.grade.id %}
+<p><a href="{%url 'student_statistic' student.id %}">{{ student.user.first_name }} {{ student.user.last_name }}</a></p>
+{% endif %}
+{% endfor %}
+<a href="{% url 'teacher_profile' %}"><h3><img class='back' src="{% static 'img/back.png' %}" title="Назад" align="center"> Назад</h3></a>
+{% endblock content %}
+
+</body>

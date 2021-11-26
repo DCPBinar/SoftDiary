@@ -1,0 +1,11 @@
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+
+<body bgcolor="#000" background="{% static 'img/background.jpg' %}">
+{% block content %}
+<h1>Вы вышли</h1>
+<a href="{% url 'home' %}"><h3><img class='home' src="{% static 'img/home.png' %}" title="Домой" align="center"> Домой</h3></a>
+{% endblock %}
+</body>
