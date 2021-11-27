@@ -6,8 +6,13 @@ import plotly.express as px
 from statistics import mean
 import pandas as pd
 import os
+import numpy as np
+import numpy.ma as ma
+from itertools import zip_longest
 import datetime
 
+
+# TODO Вывод графиков напрямую в HTML
 
 class ProfileView(ListView):
     model = Grade
@@ -42,79 +47,13 @@ class GradeView(ListView):
             except Exception:
                 pass
 
-            data_1 = []
+            dry_data = []
 
             for i in students:
-                a = []
                 mark = Mark.objects.filter(student_id=i.id)
-                a.append(round(mark.aggregate(Avg('criteria_1'))['criteria_1__avg']))
-                a.append(round(mark.aggregate(Avg('criteria_2'))['criteria_2__avg']))
-                a.append(round(mark.aggregate(Avg('criteria_3'))['criteria_3__avg']))
-                a.append(round(mark.aggregate(Avg('criteria_4'))['criteria_4__avg']))
-                a.append(round(mark.aggregate(Avg('criteria_5'))['criteria_5__avg']))
-                a.append(round(mark.aggregate(Avg('criteria_6'))['criteria_6__avg']))
-                a.append(round(mark.aggregate(Avg('criteria_7'))['criteria_7__avg']))
-                a.append(round(mark.aggregate(Avg('criteria_8'))['criteria_8__avg']))
-                a.append(round(mark.aggregate(Avg('criteria_9'))['criteria_9__avg']))
-                data_1.append(a)
-
-            data = []
-
-            for i in range(len(data_1)):
-                a = []
-                b = []
-
-                if i == 1:
-                    break
-
-                n = len(data_1)
-
-                for j in range(n):
-                    b.append(data_1[j - 1][0])
-                a.append(round(mean(b)))
-                b.clear()
-
-                for j in range(n):
-                    b.append(data_1[j - 1][1])
-                a.append(round(mean(b)))
-                b.clear()
-
-                for j in range(n):
-                    b.append(data_1[j - 1][2])
-                a.append(round(mean(b)))
-                b.clear()
-
-                for j in range(n):
-                    b.append(data_1[j - 1][3])
-                a.append(round(mean(b)))
-                b.clear()
-
-                for j in range(n):
-                    b.append(data_1[j - 1][4])
-                a.append(round(mean(b)))
-                b.clear()
-
-                for j in range(n):
-                    b.append(data_1[j - 1][5])
-                a.append(round(mean(b)))
-                b.clear()
-
-                for j in range(n):
-                    b.append(data_1[j - 1][6])
-                a.append(round(mean(b)))
-                b.clear()
-
-                for j in range(n):
-                    b.append(data_1[j - 1][7])
-                a.append(round(mean(b)))
-                b.clear()
-
-                for j in range(n):
-                    b.append(data_1[j - 1][8])
-                a.append(round(mean(b)))
-                b.clear()
-
-                data = a
+                a = [round(mark.aggregate(Avg(f'criteria_{i}'))[f'criteria_{i}__avg']) for i in range(1, 10)]
+                dry_data.append(a)
+            data = [round(np.ma.average(i)) for i in zip_longest(*dry_data)]
 
             df = pd.DataFrame(dict(
                 r=data,
@@ -145,7 +84,7 @@ class StudentDetail(DetailView):
         next = datetime.datetime(2022, 1, 1, 1, 1, 1)
         is_time = True
 
-        # АЛГОРИТМ ПРОВЕРКИ ВРЕМЕНИ
+        # TODO Алгоритм проверки времени активации отчетов
 
         context = super().get_context_data(**kwargs)
 
