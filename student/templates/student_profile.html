@@ -6,20 +6,31 @@
     <title>Profile</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/slider.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/tab.css' %}">
 </head>
-<body bgcolor="#000" background="{% static 'img/background.jpg' %}">
+<body background="{% static 'img/background.jpg' %}">
 
-<h1 align="center">Добро пожаловать, {{ request.user.first_name }}</h1>
+<h2>Добро пожаловать, {{ request.user.first_name }}</h2>
 
 {% if not request.user.student.test_passed %}
-<div align="center">
+<div>
     <a href="{% url 'test' %}"><h3><img class='test' src="{% static 'img/test.png' %}" title="Домой" align="center"> Пройти тест</h3></a>
 </div>
 {% endif %}
 
 {% if exist %}
-<h2 align="center">Ваша статистика:</h2>
-<div class="adaptivny-slayder">
+<h2>Ваша статистика:</h2>
+<div class="tab">
+    <input id="tab-one" type="checkbox" name="tabs">
+    <label for="tab-one">Что такое REUM?</label>
+    <div class="tab-content">
+        <p>R - ученику требуется помощь для выполнения этого задания</p>
+        <p>E - ученик может самостоятельно выполнять задания по шаблону</p>
+        <p>U - ученик владеет навыком свободно</p>
+        <p>M - ученик может моделировать примеры и учить этому других</p>
+    </div>
+</div>
+<div class="adaptivny-slayder" align="center">
 
     <input type="radio" name="kadoves" id="slaid1" checked>
     <input type="radio" name="kadoves" id="slaid2">
@@ -57,8 +68,88 @@
       </div>
   </div>
 </div>
+<div class="tab">
+    <input id="tab-two" type="checkbox" name="tabs">
+    <label for="tab-two">Средние баллы:</label>
+    <div class="tab-content">
+        <table>
+            <tr>
+                <td>
+                    Целеполагание:
+                </td>
+                <td>
+                    {{ avg_0 }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Мотивация:
+                </td>
+                <td>
+                    {{ avg_1 }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Планирование:
+                </td>
+                <td>
+                    {{ avg_2 }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Системное мышление:
+                </td>
+                <td>
+                    {{ avg_3 }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Аналитическое мышление:
+                </td>
+                <td>
+                    {{ avg_4 }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Генерация идей:
+                </td>
+                <td>
+                    {{ avg_5 }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Применение информации:
+                </td>
+                <td>
+                    {{ avg_6 }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Коммуникативные навыки:
+                </td>
+                <td>
+                    {{ avg_7 }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Командная работа:
+                </td>
+                <td>
+                    {{ avg_8 }}
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
 {% else %}
-<p>У вас пока нет оценок</p>
+<p align="center">У вас пока нет оценок</p>
 {% endif %}
 
 <div align="center">

@@ -53,7 +53,6 @@
 {% else %}
 <h2> У этого ученика пока нет статистики </h2>
 {% endif %}
-{% if is_time %}
 <div class="tab">
     <input id="tab-one" type="checkbox" name="tabs">
     <label for="tab-one">Что такое REUM?</label>
@@ -67,28 +66,90 @@
 <h2>Добавить отчет: </h2>
 <form method="post" action="{% url 'success' %}">
     {% csrf_token %}
-    <div>
-        <h4>Целеполагание:<input name="criteria_1" id="range_1" type="range" min="1" max="4" list="list_1" value="1" onchange="change()"> <span id="range_value_1">&nbspR</span></h4>
-        <h4>Мотивация:<input name="criteria_2" id="range_2" type="range" min="1" max="4" list="list_1" value="1" onchange="change()"> <span id="range_value_2">&nbspR</span></h4>
-        <h4>Планирование:<input name="criteria_3" id="range_3" type="range" min="1" max="4" list="list_1" value="1" onchange="change()"> <span id="range_value_3">&nbspR</span></h4>
-        <h4>Системное мышление:<input name="criteria_4" id="range_4" type="range" min="1" max="4" list="list_1" value="1" onchange="change()"> <span id="range_value_4">&nbspR</span></h4>
-        <h4>Аналитическое мышление:<input name="criteria_5" id="range_5" type="range" min="1" max="4" list="list_1" value="1" onchange="change()"> <span id="range_value_5">&nbspR</span></h4>
-        <h4>Генерация идей:<input name="criteria_6" id="range_6" type="range" min="1" max="4" list="list_1" value="1" onchange="change()"> <span id="range_value_6">&nbspR</span></h4>
-        <h4>Применение информации:<input name="criteria_7" id="range_7" type="range" min="1" max="4" list="list_1"value="1" onchange="change()"> <span id="range_value_7">&nbspR</span></h4>
-        <h4>Коммуникативные навыки:<input name="criteria_8" id="range_8" type="range" min="1" max="4" list="list_1" value="1" onchange="change()"> <span id="range_value_8">&nbspR</span></h4>
-        <h4>Командная работа:<input name="criteria_9" id="range_9" type="range" min="1" max="4" list="list_1" value="1" onchange="change()"> <span id="range_value_9">&nbspR</span></h4>
-        <datalist id="list_1">
-            <option value="1">
-            <option value="2">
-            <option value="3">
-            <option value="4">
-        </datalist>
-    </div>
+    <table>
+        <tr>
+            <td>
+                <h4>Целеполагание:</h4>
+            </td>
+            <td>
+                <input name="criteria_1" id="range_1" type="range" min="1" max="4" list="list_1" value="1" onchange="change()"> <span id="range_value_1">&nbspR</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h4>Мотивация:</h4>
+            </td>
+            <td>
+                <input name="criteria_2" id="range_2" type="range" min="1" max="4" list="list_1" value="1" onchange="change()"> <span id="range_value_2">&nbspR</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h4>Планирование:</h4>
+            </td>
+            <td>
+                <input name="criteria_3" id="range_3" type="range" min="1" max="4" list="list_1" value="1" onchange="change()"> <span id="range_value_3">&nbspR</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h4>Системное мышление:</h4>
+            </td>
+            <td>
+                <input name="criteria_4" id="range_4" type="range" min="1" max="4" list="list_1" value="1" onchange="change()"> <span id="range_value_4">&nbspR</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h4>Аналитическое мышление:</h4>
+            </td>
+            <td>
+                <input name="criteria_5" id="range_5" type="range" min="1" max="4" list="list_1" value="1" onchange="change()"> <span id="range_value_5">&nbspR</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h4>Генерация идей:</h4>
+            </td>
+            <td>
+                <input name="criteria_6" id="range_6" type="range" min="1" max="4" list="list_1" value="1" onchange="change()"> <span id="range_value_6">&nbspR</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h4>Применение информации:</h4>
+            </td>
+            <td>
+                <input name="criteria_7" id="range_7" type="range" min="1" max="4" list="list_1" value="1" onchange="change()"> <span id="range_value_7">&nbspR</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h4>Коммуникативные навыки:</h4>
+            </td>
+            <td>
+                <input name="criteria_8" id="range_8" type="range" min="1" max="4" list="list_1" value="1" onchange="change()"> <span id="range_value_8">&nbspR</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h4>Командная работа:</h4>
+            </td>
+            <td>
+                <input name="criteria_9" id="range_9" type="range" min="1" max="4" list="list_1" value="1" onchange="change()"> <span id="range_value_9">&nbspR</span>
+            </td>
+        </tr>
+    </table>
+    <datalist id="list_1">
+        <option value="1">
+        <option value="2">
+        <option value="3">
+        <option value="4">
+    </datalist>
     <h3><input type="image" class="report" src="{% static 'img/report.png'%}" title="Добавить отчет" align="center">
     Добавить отчет</h3>
     <script src="{% static 'js/range.js' %}"></script>
 </form>
-{% endif %}
 <a href="{% url 'grade' grade_id %}"><h3><img class='back' src="{% static 'img/back.png' %}" title="Назад" align="center"> Назад</h3></a>
 {% endblock content %}
 

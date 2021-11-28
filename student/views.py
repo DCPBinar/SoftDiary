@@ -1,15 +1,6 @@
 from django.views.generic import TemplateView
 from user.models import Mark
 from django.db.models import Avg
-import datetime
-import os
-import plotly
-import plotly.graph_objs as go
-import plotly.express as px
-from plotly.subplots import make_subplots
-
-import numpy as np
-import pandas as pd
 
 
 class ProfileView(TemplateView):

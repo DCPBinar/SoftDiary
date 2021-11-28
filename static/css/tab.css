@@ -1,18 +1,16 @@
-h1 {
-  text-align: center;
-}
 .half {
   float: left;
   width: 50%;
   padding: 0 1em;
 }
+
 /* Acordeon styles */
 .tab {
   position: relative;
-  margin-bottom: 1px;
   width: 50%;
   color: black;
   overflow: hidden;
+  margin: auto;
 }
 .tab input {
   position: absolute;

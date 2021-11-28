@@ -19,3 +19,4 @@ sqlparse==0.4.2
 tenacity==8.0.1
 tomli==1.2.2
 typing_extensions==4.0.0
+/home/Binar123/.local/lib/python3.9/site-packages/orca
