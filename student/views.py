@@ -56,15 +56,15 @@ class ProfileView(TemplateView):
 
             username = self.request.user.username
 
-            context['chart_path_1'] = 'charts/' + username + '/1.png'
-            context['chart_path_2'] = 'charts/' + username + '/2.png'
-            context['chart_path_3'] = 'charts/' + username + '/3.png'
-            context['chart_path_4'] = 'charts/' + username + '/4.png'
-            context['chart_path_5'] = 'charts/' + username + '/5.png'
-            context['chart_path_6'] = 'charts/' + username + '/6.png'
-            context['chart_path_7'] = 'charts/' + username + '/7.png'
-            context['chart_path_8'] = 'charts/' + username + '/8.png'
-            context['chart_path_9'] = 'charts/' + username + '/9.png'
+            context['chart_1'] = 'charts/' + username + '/1.png'
+            context['chart_2'] = 'charts/' + username + '/2.png'
+            context['chart_3'] = 'charts/' + username + '/3.png'
+            context['chart_4'] = 'charts/' + username + '/4.png'
+            context['chart_5'] = 'charts/' + username + '/5.png'
+            context['chart_6'] = 'charts/' + username + '/6.png'
+            context['chart_7'] = 'charts/' + username + '/7.png'
+            context['chart_8'] = 'charts/' + username + '/8.png'
+            context['chart_9'] = 'charts/' + username + '/9.png'
 
             context['exist'] = True
         else:

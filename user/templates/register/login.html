@@ -1,10 +1,10 @@
-
 <head>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
 </head>
 
-<body bgcolor="#000" background="{% static 'img/background.jpg' %}">
+<body>
 {% block content %}
 
 {% if next %}
@@ -16,28 +16,18 @@
   {% endif %}
 {% endif %}
 
-<form method="post" action="{% url 'login' %}">
-{% csrf_token %}
-<table>
+<div class="login-page">
+  <div class="form">
+    <form class="login-form" method="post" action="{% url 'login' %}">
+      {% csrf_token %}
+      <div class="username">{{ form.username }}</div>
+      <div class="password">{{ form.password }}</div>
+      <button>Вход</button>
+      <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+  </div>
+</div>
 
-<tr>
-  <td>Имя пользователя:</td>
-  <td>{{ form.username }}</td>
-</tr>
-
-<tr>
-  <td>Пароль:</td>
-  <td>{{ form.password }}</td>
-</tr>
-</table>
-
-<h3><input type="image" class="login" src="{% static 'img/login.png' %}" title="Вход" align="center"> Вход</h3>
-<input type="hidden" name="next" value="{{ next }}" />
-</form>
-
-<!--{% if form.errors %}-->
-<!--  <p>Ошибка</p>-->
-<!--{% endif %}-->
 
 {% endblock %}
 </body>

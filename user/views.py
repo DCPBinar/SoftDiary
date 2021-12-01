@@ -1,10 +1,11 @@
 from django.shortcuts import HttpResponseRedirect, HttpResponse
-from django.views.generic import TemplateView
+from django.views.generic import View
 from .models import Student, Teacher
 
 
-class RedirectView(TemplateView):
+class RedirectView(View):
     def post(self, request):
+        print(request)
         if request.user.is_superuser:
             return HttpResponseRedirect('/')
         elif Teacher.objects.filter(user=request.user).exists():

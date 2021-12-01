@@ -10,8 +10,6 @@ from itertools import zip_longest
 import datetime
 
 
-# TODO Вывод графиков напрямую в HTML
-
 class ProfileView(ListView):
     model = Grade
     template_name = 'teacher_profile.html'
