@@ -1,58 +1,52 @@
 <!DOCTYPE html>
 <html style="font-size: 16px;">
   <head>
-      {% load static %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="page_type" content="np-template-header-footer-from-plugin">
-    <title>Loginform</title>
-    <link rel="stylesheet" href="{% static 'css/nicepage.css' %}" media="screen">
-    <link rel="stylesheet" href="{% static 'css/login.css' %}" media="screen">
-    <script class="u-script" type="text/javascript" src="{% static 'js/jquery.js' %}" defer=""></script>
-    <script class="u-script" type="text/javascript" src="{% static 'js/nicepage.js' %}" defer=""></script>
+    <title>login</title>
+    <link rel="stylesheet" href="../../../static/css/nicepage.css" media="screen">
+<link rel="stylesheet" href="../../../static/css/login.css" media="screen">
+    <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
     <meta name="generator" content="Nicepage 4.0.3, nicepage.com">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
-    
-    
     
     
     
     <script type="application/ld+json">{
 		"@context": "http://schema.org",
 		"@type": "Organization",
-		"name": "SoftDiary_design"
+		"name": "SoftDiary_BETAV2"
 }</script>
     <meta name="theme-color" content="#478ac9">
-    <meta property="og:title" content="Loginform">
+    <meta property="og:title" content="login">
     <meta property="og:description" content="">
     <meta property="og:type" content="website">
   </head>
   <body class="u-body">
-    <section class="u-clearfix u-section-1" id="sec-2ed6">
-      <div class="u-clearfix u-sheet u-sheet-1">
-        <div class="u-align-center u-container-style u-grey-10 u-group u-radius-50 u-shape-round u-group-1">
-          <div class="u-container-layout u-container-layout-1"><span class="u-icon u-icon-circle u-text-palette-1-base u-icon-1"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 45.532 45.532" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-862c"></use></svg><svg class="u-svg-content" viewBox="0 0 45.532 45.532" x="0px" y="0px" id="svg-862c" style="enable-background:new 0 0 45.532 45.532;"><g><path d="M22.766,0.001C10.194,0.001,0,10.193,0,22.766s10.193,22.765,22.766,22.765c12.574,0,22.766-10.192,22.766-22.765   S35.34,0.001,22.766,0.001z M22.766,6.808c4.16,0,7.531,3.372,7.531,7.53c0,4.159-3.371,7.53-7.531,7.53   c-4.158,0-7.529-3.371-7.529-7.53C15.237,10.18,18.608,6.808,22.766,6.808z M22.761,39.579c-4.149,0-7.949-1.511-10.88-4.012   c-0.714-0.609-1.126-1.502-1.126-2.439c0-4.217,3.413-7.592,7.631-7.592h8.762c4.219,0,7.619,3.375,7.619,7.592   c0,0.938-0.41,1.829-1.125,2.438C30.712,38.068,26.911,39.579,22.761,39.579z"></path>
-</g></svg></span>
-            <h3 class="u-text u-text-default u-text-1">Вход</h3>
+    <section class="u-align-center u-clearfix u-grey-10 u-section-1" id="sec-3e5e">
+      <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+        <div class="u-align-center u-container-style u-group u-radius-50 u-shape-round u-white u-group-1">
+          <div class="u-container-layout u-container-layout-1">
+            <h3 class="u-text u-text-default u-text-1">Вход<br>
+            </h3>
             <div class="u-expanded-width u-form u-login-control u-form-1">
-              <form action="{% url 'login' %}" method="POST" class="u-clearfix u-form-custom-backend u-form-spacing-30 u-form-vertical u-inner-form" source="custom" name="form-3" style="padding: 10px;">
+              <form action="{% url 'login' %}" method="post" class="u-clearfix u-form-custom-backend u-form-spacing-35 u-form-vertical u-inner-form" source="custom" name="form-2" style="padding: 10px;">
                 {% csrf_token %}
                 <div class="u-form-group u-form-name">
-                  <label for="username-5b0a" class="u-form-control-hidden u-label"></label>
-                    <div id="username-5b0a" class="u-border-2 u-border-white u-input u-input-rectangle u-radius-43 u-white">{{ form.username }}</div>
+                  <label for="username-708d" class="u-form-control-hidden u-label"></label>
+                  <input type="text" placeholder="Имя пользователя" id="username-708d" name="username" class="u-grey-5 u-input u-input-rectangle" required="">
                 </div>
                 <div class="u-form-group u-form-password">
-                  <label for="password-5b0a" class="u-form-control-hidden u-label"></label>
-                    <div id="password-5b0a" name="password" class="u-border-2 u-border-white u-input u-input-rectangle u-radius-43 u-white">{{ form.password }}</div>
+                  <label for="password-708d" class="u-form-control-hidden u-label"></label>
+                  <input type="password" placeholder="Пароль" id="password-708d" name="password" class="u-grey-5 u-input u-input-rectangle" required="">
                 </div>
-                <div class="u-align-left u-form-group u-form-submit">
-                  <a href="#" class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-radius-50 u-btn-1">Вход<br>
-                  </a>
-                  <input type="submit" value="submit" class="u-form-control-hidden">
+                <div class="u-align-center u-form-group u-form-submit">
+                  <input type="submit" class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-1 u-radius-17 u-btn-1" value="Войти">
                 </div>
-                <input type="hidden" value="" name="recaptchaResponse">
               </form>
             </div>
           </div>
@@ -62,21 +56,8 @@
     
     
     
-    
-    
-    <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-a0f1"><div class="u-clearfix u-sheet u-sheet-1">
-        <p class="u-small-text u-text u-text-variant u-text-1">Пример текста. Кликните, чтобы выбрать текстовый блок. Кликните еще раз или сделайте двойной клик, чтобы начать редактирование текста.</p>
+    <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-0893"><div class="u-clearfix u-sheet u-sheet-1">
+        <p class="u-small-text u-text u-text-variant u-text-1">Портал разработан Дементьевым Ярославом специально для школы "Путь у Успеху"</p>
       </div></footer>
-    <section class="u-backlink u-clearfix u-grey-80">
-      <a class="u-link" href="https://nicepage.com/html-templates" target="_blank">
-        <span>Free HTML Templates</span>
-      </a>
-      <p class="u-text">
-        <span>created with</span>
-      </p>
-      <a class="u-link" href="https://nicepage.me" target="_blank">
-        <span>Best Website Builder</span>
-      </a>. 
-    </section>
   </body>
 </html>

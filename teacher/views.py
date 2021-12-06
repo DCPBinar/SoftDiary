@@ -7,7 +7,6 @@ import pandas as pd
 import os
 import numpy as np
 from itertools import zip_longest
-import datetime
 
 
 class ProfileView(ListView):
@@ -24,6 +23,7 @@ class GradeView(ListView):
         grade_id = self.kwargs['grade_id']
         grade = Grade.objects.get(id=grade_id)
         students = Student.objects.filter(grade_id=grade_id)
+        mark = Mark.objects.all()
         context = super().get_context_data(**kwargs)
         context['avg_exist'] = True
         self.request.session['grade_id'] = grade_id
@@ -46,8 +46,8 @@ class GradeView(ListView):
             dry_data = []
 
             for i in students:
-                mark = Mark.objects.filter(student_id=i.id)
-                a = [round(mark.aggregate(Avg(f'criteria_{i}'))[f'criteria_{i}__avg']) for i in range(1, 10)]
+                mark_1 = Mark.objects.filter(student_id=i.id)
+                a = [round(mark_1.aggregate(Avg(f'criteria_{i}'))[f'criteria_{i}__avg']) for i in range(1, 10)]
                 dry_data.append(a)
             data = [round(np.ma.average(i)) for i in zip_longest(*dry_data)]
 
@@ -59,12 +59,13 @@ class GradeView(ListView):
                        'Коммуникативные навыки', 'Командная работа']))
             chart = px.line_polar(df, r='r', theta='theta', line_close=True, )
             chart.update_traces(fill='toself')
-            chart.write_image(f'static/charts/{grade.grade}/1.png')
 
-            context['chart_avg'] = '/charts/' + str(grade.grade) + '/1.png'
+            chart.write_image(f'static/charts/' + str(grade.grade) + '/' + str(len(mark)) + '.png')
+
+            context['chart_avg'] = '/charts/' + str(grade.grade) + '/' + str(len(mark)) + '.png'
 
         else:
-            context['avg_exist'] = False
+            context[' '] = False
 
         return context
 
@@ -74,6 +75,9 @@ class StudentDetail(DetailView):
     template_name = 'student.html'
 
     def get_context_data(self, **kwargs):
+
+        # TODO Очистка папки
+
         student = Student.objects.get(id=self.kwargs['pk'])
         username = student.user.username
 
@@ -81,11 +85,10 @@ class StudentDetail(DetailView):
 
         self.request.session['student_id'] = student.id
         context['student'] = student
-
-        if Mark.objects.filter(student_id=self.kwargs['pk']).exists():
+        mark = Mark.objects.filter(student_id=self.kwargs['pk'])
+        if mark.exists():
             context['stat'] = True
             username = student.user.username
-            mark = Mark.objects.filter(student_id=student.id)
 
             try:
                 os.mkdir(f'static/charts/{username}')
@@ -104,7 +107,7 @@ class StudentDetail(DetailView):
                             y=y,
                             title='Целеполагание',
                             labels=dict(x='Дата', y='REUM'))
-            chart.write_image(f'static/charts/{username}/1.png')
+            chart.write_image(f'static/charts/{username}/1_{len(mark)}.png')
 
             # Мотивация
 
@@ -120,7 +123,7 @@ class StudentDetail(DetailView):
                             y=y,
                             title='Мотивация',
                             labels=dict(x='Дата', y='REUM'))
-            chart.write_image(f'static/charts/{username}/2.png')
+            chart.write_image(f'static/charts/{username}/2_{len(mark)}.png')
 
             # Планирование
 
@@ -137,7 +140,7 @@ class StudentDetail(DetailView):
                             y=y,
                             title='Планирование',
                             labels=dict(x='Дата', y='REUM'))
-            chart.write_image(f'static/charts/{username}/3.png')
+            chart.write_image(f'static/charts/{username}/3_{len(mark)}.png')
 
             # Системное мышление
 
@@ -154,7 +157,7 @@ class StudentDetail(DetailView):
                             y=y,
                             title='Системное мышление',
                             labels=dict(x='Дата', y='REUM'))
-            chart.write_image(f'static/charts/{username}/4.png')
+            chart.write_image(f'static/charts/{username}/4_{len(mark)}.png')
 
             # Аналитическое мышление
 
@@ -171,7 +174,7 @@ class StudentDetail(DetailView):
                             y=y,
                             title='Аналитическое мышление',
                             labels=dict(x='Дата', y='REUM'))
-            chart.write_image(f'static/charts/{username}/5.png')
+            chart.write_image(f'static/charts/{username}/5_{len(mark)}.png')
 
             # Генерация идей
 
@@ -188,7 +191,7 @@ class StudentDetail(DetailView):
                             y=y,
                             title='Системное мышление',
                             labels=dict(x='Дата', y='REUM'))
-            chart.write_image(f'static/charts/{username}/6.png')
+            chart.write_image(f'static/charts/{username}/6_{len(mark)}.png')
 
             # Применение информации
 
@@ -205,7 +208,7 @@ class StudentDetail(DetailView):
                             y=y,
                             title='Применение информации',
                             labels=dict(x='Дата', y='REUM'))
-            chart.write_image(f'static/charts/{username}/7.png')
+            chart.write_image(f'static/charts/{username}/7_{len(mark)}.png')
 
             # Коммуникативные навыки
 
@@ -222,7 +225,7 @@ class StudentDetail(DetailView):
                             y=y,
                             title='Коммуникативные навыки',
                             labels=dict(x='Дата', y='REUM'))
-            chart.write_image(f'static/charts/{username}/8.png')
+            chart.write_image(f'static/charts/{username}/8_{len(mark)}.png')
 
             # Командная работа
 
@@ -239,19 +242,19 @@ class StudentDetail(DetailView):
                             y=y,
                             title='Командная работа',
                             labels=dict(x='Дата', y='REUM'))
-            chart.write_image(f'static/charts/{username}/9.png')
+            chart.write_image(f'static/charts/{username}/9_{len(mark)}.png')
         else:
             context['stat'] = False
 
-        context['chart_1'] = 'charts/' + username + '/1.png'
-        context['chart_2'] = 'charts/' + username + '/2.png'
-        context['chart_3'] = 'charts/' + username + '/3.png'
-        context['chart_4'] = 'charts/' + username + '/4.png'
-        context['chart_5'] = 'charts/' + username + '/5.png'
-        context['chart_6'] = 'charts/' + username + '/6.png'
-        context['chart_7'] = 'charts/' + username + '/7.png'
-        context['chart_8'] = 'charts/' + username + '/8.png'
-        context['chart_9'] = 'charts/' + username + '/9.png'
+        context['chart_1'] = 'charts/' + username + '/1_' + str(len(mark)) + '.png'
+        context['chart_2'] = 'charts/' + username + '/2_' + str(len(mark)) + '.png'
+        context['chart_3'] = 'charts/' + username + '/3_' + str(len(mark)) + '.png'
+        context['chart_4'] = 'charts/' + username + '/4_' + str(len(mark)) + '.png'
+        context['chart_5'] = 'charts/' + username + '/5_' + str(len(mark)) + '.png'
+        context['chart_6'] = 'charts/' + username + '/6_' + str(len(mark)) + '.png'
+        context['chart_7'] = 'charts/' + username + '/7_' + str(len(mark)) + '.png'
+        context['chart_8'] = 'charts/' + username + '/8_' + str(len(mark)) + '.png'
+        context['chart_9'] = 'charts/' + username + '/9_' + str(len(mark)) + '.png'
 
         context['grade_id'] = self.request.session.get('grade_id', None)
 
