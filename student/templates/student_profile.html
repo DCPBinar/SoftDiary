@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{% static 'css/nicepage.css' %}" media="screen">
 <link rel="stylesheet" href="{% static 'css/student_profile.css' %}" media="screen">
     <script class="u-script" type="text/javascript" src="{% static 'js/jquery.js' %}" defer=""></script>
-    <script class="u-script" type="text/javascript" src="{% static 'js/nicepage.js' %}Ы" defer=""></script>
+    <script class="u-script" type="text/javascript" src="{% static 'js/nicepage.js' %}" defer=""></script>
     <meta name="generator" content="Nicepage 4.0.3, nicepage.com">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
 
@@ -62,7 +62,6 @@
           </div>
           <div class="u-custom-menu u-nav-container">
             <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-black u-text-hover-palette-2-base" href="{% url 'home' %}" style="padding: 10px 0px 10px 20px;">Главная</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-black u-text-hover-palette-2-base" href="{% url 'redirect' %}" style="padding: 10px 0px 10px 20px;">Личный кабинет</a>
 </li></ul>
           </div>
           <div class="u-custom-menu u-nav-container-collapse">
@@ -70,7 +69,6 @@
               <div class="u-inner-container-layout u-sidenav-overflow">
                 <div class="u-menu-close"></div>
                 <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="{% url 'home' %}" style="padding: 10px 0px 10px 20px;">Главная</a>
-</li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="{% url 'redirect' %}" style="padding: 10px 0px 10px 20px;">Личный кабинет</a>
 </li></ul>
               </div>
             </div>
@@ -80,9 +78,10 @@
       </div></header>
     <section class="u-clearfix u-grey-5 u-section-1" id="sec-016f">
       <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-        <h1 class="u-text u-text-default u-text-1">Добрый * время, *Имя</h1>
+        <h1 class="u-text u-text-default u-text-1">{{ time }}, {{ request.user.first_name }}</h1>
       </div>
     </section>
+{% if not exist %}
     <section class="u-clearfix u-grey-5 u-section-2" id="sec-7a25">
       <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
         <h1 class="u-align-center u-text u-text-1">У вас пока нет статистики</h1><span class="u-icon u-icon-circle u-text-custom-color-1 u-icon-1"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 32 32" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-9413"></use></svg><svg class="u-svg-content" viewBox="0 0 32 32" id="svg-9413"><g id="Error_x2C__lost_x2C__no_page_x2C__not_found"><g><g><g><circle cx="7.5" cy="5.5" fill="currentColor" r="0.5"></circle><circle cx="5.5" cy="5.5" fill="currentColor" r="0.5"></circle><circle cx="3.5" cy="5.5" fill="currentColor" r="0.5"></circle><path d="M30.5,8h-29C1.224,8,1,7.776,1,7.5S1.224,7,1.5,7h29C30.776,7,31,7.224,31,7.5S30.776,8,30.5,8z" fill="currentColor"></path><path d="M29.5,29h-27C1.673,29,1,28.327,1,27.5v-23C1,3.673,1.673,3,2.5,3h27C30.327,3,31,3.673,31,4.5v23      C31,28.327,30.327,29,29.5,29z M2.5,4C2.224,4,2,4.225,2,4.5v23C2,27.775,2.224,28,2.5,28h27c0.276,0,0.5-0.225,0.5-0.5v-23      C30,4.225,29.776,4,29.5,4H2.5z" fill="currentColor"></path>
@@ -93,53 +92,31 @@
 </g></svg></span>
       </div>
     </section>
+{% endif %}
+{% if not request.student.test_passed %}
     <section class="u-align-center u-clearfix u-grey-5 u-section-3" id="sec-aa53">
       <div class="u-clearfix u-sheet u-sheet-1">
         <h2 class="u-text u-text-default u-text-1">Пройдите тест для более полной информации</h2>
         <a href="{% url 'test' %}" class="u-border-none u-btn u-btn-round u-button-style u-custom-color-1 u-hover-custom-color-1 u-radius-50 u-btn-1" data-animation-name="slideIn" data-animation-duration="1000" data-animation-direction="Left">Пройти тест</a>
       </div>
     </section>
+{% endif %}
+{% if request.student.test_passed %}
     <section class="u-clearfix u-grey-5 u-section-4" id="sec-363b">
       <div class="u-clearfix u-sheet u-sheet-1">
         <img class="u-image u-image-default u-image-1" src="../../../../Users/79163/OneDrive/Рабочий%20стол/SoftDiary_BETAV2/images/451.png" alt="" data-image-width="700" data-image-height="500">
         <h2 class="u-text u-text-default u-text-1">Результаты теста</h2>
       </div>
     </section>
-    <section class="u-align-center u-clearfix u-grey-5 u-section-5" id="sec-4789">
-      <div class="u-clearfix u-sheet u-sheet-1">
-        <div class="u-accordion u-collapsed-by-default u-spacing-20 u-accordion-1">
-          <div class="u-accordion-item">
-            <a class="u-accordion-link u-border-4 u-border-active-custom-color-1 u-border-custom-color-1 u-border-hover-custom-color-1 u-button-style u-radius-31 u-text-active-custom-color-1 u-text-custom-color-1 u-text-hover-custom-color-1 u-accordion-link-1" id="link-accordion-7c0e" aria-controls="accordion-7c0e" aria-selected="false">
-              <span class="u-accordion-link-text">Динамика ваших показателей<br>
-              </span><span class="u-accordion-link-icon u-icon u-text-grey-40 u-icon-1"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 490.656 490.656" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-4e56"></use></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content" viewBox="0 0 490.656 490.656" x="0px" y="0px" id="svg-4e56" style="enable-background:new 0 0 490.656 490.656;"><g><g><path d="M487.536,120.445c-4.16-4.16-10.923-4.16-15.083,0L245.339,347.581L18.203,120.467c-4.16-4.16-10.923-4.16-15.083,0    c-4.16,4.16-4.16,10.923,0,15.083l234.667,234.667c2.091,2.069,4.821,3.115,7.552,3.115s5.461-1.045,7.531-3.136l234.667-234.667    C491.696,131.368,491.696,124.605,487.536,120.445z"></path>
-</g>
-</g></svg></span>
-            </a>
-            <div class="u-accordion-pane u-align-left u-container-style u-accordion-pane-1" id="accordion-7c0e" aria-labelledby="link-accordion-7c0e">
-              <div class="u-container-layout u-container-layout-1">
-                <img class="u-image u-image-default u-image-1" src="../../../../Users/79163/OneDrive/Рабочий%20стол/SoftDiary_BETAV2/images/1_39.png" alt="" data-image-width="700" data-image-height="500" data-animation-name="slideIn" data-animation-duration="1000" data-animation-direction="Down">
-                <img class="u-image u-image-default u-image-2" src="../../../../Users/79163/OneDrive/Рабочий%20стол/SoftDiary_BETAV2/images/1_39.png" alt="" data-image-width="700" data-image-height="500">
-                <img class="u-image u-image-default u-image-3" src="../../../../Users/79163/OneDrive/Рабочий%20стол/SoftDiary_BETAV2/images/1_39.png" alt="" data-image-width="700" data-image-height="500">
-                <img class="u-image u-image-default u-image-4" src="../../../../Users/79163/OneDrive/Рабочий%20стол/SoftDiary_BETAV2/images/1_39.png" alt="" data-image-width="700" data-image-height="500">
-                <img class="u-image u-image-default u-image-5" src="../../../../Users/79163/OneDrive/Рабочий%20стол/SoftDiary_BETAV2/images/1_39.png" alt="" data-image-width="700" data-image-height="500">
-                <img class="u-image u-image-default u-image-6" src="../../../../Users/79163/OneDrive/Рабочий%20стол/SoftDiary_BETAV2/images/1_39.png" alt="" data-image-width="700" data-image-height="500">
-                <img class="u-image u-image-default u-image-7" src="../../../../Users/79163/OneDrive/Рабочий%20стол/SoftDiary_BETAV2/images/1_39.png" alt="" data-image-width="700" data-image-height="500">
-                <img class="u-image u-image-default u-image-8" src="../../../../Users/79163/OneDrive/Рабочий%20стол/SoftDiary_BETAV2/images/1_39.png" alt="" data-image-width="700" data-image-height="500">
-                <img class="u-image u-image-default u-image-9" src="../../../../Users/79163/OneDrive/Рабочий%20стол/SoftDiary_BETAV2/images/1_39.png" alt="" data-image-width="700" data-image-height="500">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="u-align-center u-clearfix u-grey-5 u-section-6" id="carousel_ec6c">
-      <div class="u-clearfix u-sheet u-sheet-1">
+{% endif %}
+<section class="u-align-center u-clearfix u-grey-5 u-section-5" id="carousel_ec6c">
+    <div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-accordion u-collapsed-by-default u-spacing-20 u-accordion-1">
           <div class="u-accordion-item">
             <a class="u-accordion-link u-border-4 u-border-active-custom-color-1 u-border-custom-color-1 u-border-hover-custom-color-1 u-button-style u-radius-31 u-text-active-custom-color-1 u-text-custom-color-1 u-text-hover-custom-color-1 u-accordion-link-1" id="link-accordion-7c0e" aria-controls="accordion-7c0e" aria-selected="false">
               <span class="u-accordion-link-text">Что такое REUM?</span><span class="u-accordion-link-icon u-icon u-text-grey-40 u-icon-1"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 490.656 490.656" style=""><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-4e56"></use></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xml:space="preserve" class="u-svg-content" viewBox="0 0 490.656 490.656" x="0px" y="0px" id="svg-4e56" style="enable-background:new 0 0 490.656 490.656;"><g><g><path d="M487.536,120.445c-4.16-4.16-10.923-4.16-15.083,0L245.339,347.581L18.203,120.467c-4.16-4.16-10.923-4.16-15.083,0    c-4.16,4.16-4.16,10.923,0,15.083l234.667,234.667c2.091,2.069,4.821,3.115,7.552,3.115s5.461-1.045,7.531-3.136l234.667-234.667    C491.696,131.368,491.696,124.605,487.536,120.445z"></path>
-</g>
-</g></svg></span>
+        </g>
+        </g></svg></span>
             </a>
             <div class="u-accordion-pane u-align-left u-container-style u-accordion-pane-1" id="accordion-7c0e" aria-labelledby="link-accordion-7c0e">
               <div class="u-container-layout u-container-layout-1">
@@ -149,8 +126,92 @@
             </div>
           </div>
         </div>
+    </div>
+</section>
+{% if exist %}
+    <section class="u-align-center u-clearfix u-grey-5 u-section-6" id="sec-3324">
+      <div class="u-clearfix u-sheet u-valign-top u-sheet-1">
+        <div class="u-align-center u-tab-links-align-center u-tabs u-tabs-1">
+          <ul class="u-border-1 u-border-grey-25 u-spacing-30 u-tab-list u-unstyled" role="tablist">
+            <li class="u-tab-item" role="presentation">
+              <a class="active u-active-white u-border-3 u-border-active-custom-color-1 u-border-grey-60 u-border-hover-custom-color-1 u-button-style u-grey-5 u-radius-11 u-tab-link u-text-active-custom-color-1 u-tab-link-1" id="link-tab-0da5" href="#tab-0da5" role="tab" aria-controls="tab-0da5" aria-selected="true">Целеполагание</a>
+            </li>
+            <li class="u-tab-item" role="presentation">
+              <a class="u-active-white u-border-3 u-border-active-custom-color-1 u-border-grey-60 u-border-hover-custom-color-1 u-button-style u-grey-5 u-radius-11 u-tab-link u-text-active-custom-color-1 u-tab-link-2" id="link-tab-14b7" href="#tab-14b7" role="tab" aria-controls="tab-14b7" aria-selected="false">Мотивация</a>
+            </li>
+            <li class="u-tab-item" role="presentation">
+              <a class="u-active-white u-border-3 u-border-active-custom-color-1 u-border-grey-60 u-border-hover-custom-color-1 u-button-style u-grey-5 u-radius-11 u-tab-link u-text-active-custom-color-1 u-tab-link-3" id="link-tab-2917" href="#tab-2917" role="tab" aria-controls="tab-2917" aria-selected="false">Планирование</a>
+            </li>
+            <li class="u-tab-item" role="presentation">
+              <a class="u-active-white u-border-3 u-border-active-custom-color-1 u-border-grey-60 u-border-hover-custom-color-1 u-button-style u-grey-5 u-radius-11 u-tab-link u-text-active-custom-color-1 u-tab-link-4" id="link-tab-bd9a" href="#tab-bd9a" role="tab" aria-controls="tab-bd9a" aria-selected="false">Системное мышление</a>
+            </li>
+            <li class="u-tab-item" role="presentation">
+              <a class="u-active-white u-border-3 u-border-active-custom-color-1 u-border-grey-60 u-border-hover-custom-color-1 u-button-style u-grey-5 u-radius-11 u-tab-link u-text-active-custom-color-1 u-tab-link-5" id="link-tab-d753" href="#tab-d753" role="tab" aria-controls="tab-d753" aria-selected="false">Аналитическое мышление</a>
+            </li>
+            <li class="u-tab-item" role="presentation">
+              <a class="u-active-white u-border-3 u-border-active-custom-color-1 u-border-grey-60 u-border-hover-custom-color-1 u-button-style u-grey-5 u-radius-11 u-tab-link u-text-active-custom-color-1 u-tab-link-6" id="link-tab-4769" href="#tab-4769" role="tab" aria-controls="tab-4769" aria-selected="false">Генерация идей</a>
+            </li>
+            <li class="u-tab-item" role="presentation">
+              <a class="u-active-white u-border-3 u-border-active-custom-color-1 u-border-grey-60 u-border-hover-custom-color-1 u-button-style u-grey-5 u-radius-11 u-tab-link u-text-active-custom-color-1 u-tab-link-7" id="link-tab-3ee6" href="#tab-3ee6" role="tab" aria-controls="tab-3ee6" aria-selected="false">Применение информации</a>
+            </li>
+            <li class="u-tab-item" role="presentation">
+              <a class="u-active-white u-border-3 u-border-active-custom-color-1 u-border-grey-60 u-border-hover-custom-color-1 u-button-style u-grey-5 u-radius-11 u-tab-link u-text-active-custom-color-1 u-tab-link-8" id="link-tab-4fc7" href="#tab-4fc7" role="tab" aria-controls="tab-4fc7" aria-selected="false">Коммуникативные навыки</a>
+            </li>
+            <li class="u-tab-item" role="presentation">
+              <a class="u-active-white u-border-3 u-border-active-custom-color-1 u-border-grey-60 u-border-hover-custom-color-1 u-button-style u-grey-5 u-radius-11 u-tab-link u-text-active-custom-color-1 u-tab-link-9" id="link-tab-df50" href="#tab-df50" role="tab" aria-controls="tab-df50" aria-selected="false">Командная работа</a>
+            </li>
+          </ul>
+          <div class="u-tab-content">
+            <div class="u-align-center u-container-style u-shape-rectangle u-tab-active u-tab-pane" id="tab-0da5" role="tabpanel" aria-labelledby="link-tab-0da5">
+              <div class="u-container-layout u-container-layout-1">
+                <img class="u-image u-image-round u-radius-16 u-image-1" src="{% static chart_1 %}" alt="" data-image-width="700" data-image-height="500">
+              </div>
+            </div>
+            <div class="u-align-left u-container-style u-shape-rectangle u-tab-pane" id="tab-14b7" role="tabpanel" aria-labelledby="link-tab-14b7">
+              <div class="u-container-layout u-container-layout-2">
+                <img class="u-image u-image-round u-radius-16 u-image-2" src="{% static chart_2 %}" alt="" data-image-width="700" data-image-height="500">
+              </div>
+            </div>
+            <div class="u-container-style u-shape-rectangle u-tab-pane" id="tab-2917" role="tabpanel" aria-labelledby="link-tab-2917">
+              <div class="u-container-layout u-container-layout-3">
+                <img class="u-image u-image-round u-radius-16 u-image-3" src="{% static chart_3 %}" alt="" data-image-width="700" data-image-height="500">
+              </div>
+            </div>
+            <div class="u-container-style u-shape-rectangle u-tab-pane u-tab-pane-4" id="tab-bd9a" role="tabpanel" aria-labelledby="link-tab-bd9a">
+              <div class="u-container-layout u-container-layout-4">
+                <img class="u-image u-image-round u-radius-16 u-image-4" src="{% static chart_4 %}" alt="" data-image-width="700" data-image-height="500">
+              </div>
+            </div>
+            <div class="u-container-style u-shape-rectangle u-tab-pane u-tab-pane-5" id="tab-d753" role="tabpanel" aria-labelledby="link-tab-d753">
+              <div class="u-container-layout u-container-layout-5">
+                <img class="u-image u-image-round u-radius-16 u-image-5" src="{% static chart_5 %}" alt="" data-image-width="700" data-image-height="500">
+              </div>
+            </div>
+            <div class="u-container-style u-shape-rectangle u-tab-pane u-tab-pane-6" id="tab-4769" role="tabpanel" aria-labelledby="link-tab-4769">
+              <div class="u-container-layout u-container-layout-6">
+                <img class="u-image u-image-round u-radius-16 u-image-6" src="{% static chart_6 %}" alt="" data-image-width="700" data-image-height="500">
+              </div>
+            </div>
+            <div class="u-container-style u-shape-rectangle u-tab-pane u-tab-pane-7" id="tab-3ee6" role="tabpanel" aria-labelledby="link-tab-3ee6">
+              <div class="u-container-layout u-container-layout-7">
+                <img class="u-image u-image-round u-radius-16 u-image-7" src="{% static chart_7 %}" alt="" data-image-width="700" data-image-height="500">
+              </div>
+            </div>
+            <div class="u-container-style u-shape-rectangle u-tab-pane u-tab-pane-8" id="tab-4fc7" role="tabpanel" aria-labelledby="link-tab-4fc7">
+              <div class="u-container-layout u-container-layout-8">
+                <img class="u-image u-image-round u-radius-16 u-image-8" src="{% static chart_8 %}" alt="" data-image-width="700" data-image-height="500">
+              </div>
+            </div>
+            <div class="u-container-style u-shape-rectangle u-tab-pane u-tab-pane-9" id="tab-df50" role="tabpanel" aria-labelledby="link-tab-df50">
+              <div class="u-container-layout u-container-layout-9">
+                <img class="u-image u-image-round u-radius-16 u-image-9" src="{% static chart_9 %}" alt="" data-image-width="700" data-image-height="500">
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
+{% endif %}
     <section class="u-align-center u-clearfix u-grey-5 u-section-7" id="carousel_72b2">
       <div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-expanded-width u-table u-table-responsive u-table-1">
@@ -167,40 +228,42 @@
             </thead>
             <tbody class="u-table-body">
               <tr style="height: 55px;">
-                <td class="u-border-1 u-border-grey-30 u-border-no-left u-border-no-right u-table-cell">Item #1</td>
-                <td class="u-border-1 u-border-grey-30 u-border-no-left u-border-no-right u-table-cell">Description</td>
+                <td class="u-border-1 u-border-grey-30 u-border-no-left u-border-no-right u-table-cell">Целеполагание</td>
+                <td class="u-border-1 u-border-grey-30 u-border-no-left u-border-no-right u-table-cell">{{ avg_0 }}</td>
               </tr>
               <tr style="height: 55px;">
-                <td class="u-border-1 u-border-grey-30 u-border-no-left u-border-no-right u-table-cell">Item #2</td>
-                <td class="u-border-1 u-border-grey-30 u-border-no-left u-border-no-right u-table-cell">Description</td>
+                <td class="u-border-1 u-border-grey-30 u-border-no-left u-border-no-right u-table-cell">Мотивация</td>
+                <td class="u-border-1 u-border-grey-30 u-border-no-left u-border-no-right u-table-cell">{{ avg_1 }}</td>
               </tr>
               <tr style="height: 55px;">
-                <td class="u-border-1 u-border-grey-30 u-border-no-left u-border-no-right u-table-cell">Item #3</td>
-                <td class="u-border-1 u-border-grey-30 u-border-no-left u-border-no-right u-table-cell">Description</td>
+                <td class="u-border-1 u-border-grey-30 u-border-no-left u-border-no-right u-table-cell">Планирование</td>
+                <td class="u-border-1 u-border-grey-30 u-border-no-left u-border-no-right u-table-cell">{{ avg_2 }}</td>
               </tr>
               <tr style="height: 29px;">
-                <td class="u-border-1 u-border-grey-30 u-border-no-left u-border-no-right u-table-cell">Item #4</td>
-                <td class="u-border-1 u-border-grey-30 u-border-no-left u-border-no-right u-table-cell">Description</td>
+                <td class="u-border-1 u-border-grey-30 u-border-no-left u-border-no-right u-table-cell">Системное мышление</td>
+                <td class="u-border-1 u-border-grey-30 u-border-no-left u-border-no-right u-table-cell">{{ avg_3 }}</td>
               </tr>
               <tr style="height: 46px;">
-                <td class="u-border-1 u-border-grey-30 u-border-no-left u-border-no-right u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-border-no-left u-border-no-right u-table-cell"></td>
+                <td class="u-border-1 u-border-grey-30 u-border-no-left u-border-no-right u-table-cell">Аналитическое мышление</td>
+                <td class="u-border-1 u-border-grey-30 u-border-no-left u-border-no-right u-table-cell">{{ avg_4 }}</td>
               </tr>
               <tr style="height: 46px;">
-                <td class="u-border-1 u-border-grey-30 u-border-no-left u-border-no-right u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-border-no-left u-border-no-right u-table-cell"></td>
+                <td class="u-border-1 u-border-grey-30 u-border-no-left u-border-no-right u-table-cell">Генерация идей</td>
+                <td class="u-border-1 u-border-grey-30 u-border-no-left u-border-no-right u-table-cell">{{ avg_5 }}</td>
               </tr>
               <tr style="height: 46px;">
-                <td class="u-border-1 u-border-grey-30 u-border-no-left u-border-no-right u-table-cell"></td>
-                <td class="u-border-1 u-border-grey-30 u-border-no-left u-border-no-right u-table-cell"></td>
+                <td class="u-border-1 u-border-grey-30 u-border-no-left u-border-no-right u-table-cell">Применение информации</td>
+                <td class="u-border-1 u-border-grey-30 u-border-no-left u-border-no-right u-table-cell">{{ avg_6 }}</td>
+              </tr>
+              <tr style="height: 46px;">
+                <td class="u-border-1 u-border-grey-30 u-border-no-left u-border-no-right u-table-cell">Коммуникативные навыки</td>
+                <td class="u-border-1 u-border-grey-30 u-border-no-left u-border-no-right u-table-cell">{{ avg_7 }}</td>
+              </tr>
+              <tr style="height: 46px;">
+                <td class="u-border-1 u-border-grey-30 u-border-no-left u-border-no-right u-table-cell">Командная работа</td>
+                <td class="u-border-1 u-border-grey-30 u-border-no-left u-border-no-right u-table-cell">{{ avg_8 }}</td>
               </tr>
             </tbody>
-            <tfoot class="u-table-footer u-table-footer-1">
-              <tr style="height: 46px;">
-                <td class="u-border-1 u-border-grey-30 u-border-no-left u-border-no-right u-border-no-top u-table-cell">Item #5</td>
-                <td class="u-border-1 u-border-grey-30 u-border-no-left u-border-no-right u-border-no-top u-table-cell">Description</td>
-              </tr>
-            </tfoot>
           </table>
         </div>
       </div>

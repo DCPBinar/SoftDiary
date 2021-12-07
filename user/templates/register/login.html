@@ -49,6 +49,13 @@
                 </div>
               </form>
             </div>
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <h3 style="color: red;">{% if message.tags == 'ERROR' %} class="{{ message.tags }}"{% endif %} {{ message }}</h3>
+                {% endfor %}
+            </ul>
+            {% endif %}
           </div>
         </div>
       </div>

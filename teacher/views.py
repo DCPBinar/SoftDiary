@@ -5,14 +5,42 @@ from django.db.models import Avg
 import plotly.express as px
 import pandas as pd
 import os
+import datetime
 import numpy as np
 from itertools import zip_longest
 
 
 class ProfileView(ListView):
-    model = Grade
     template_name = 'teacher_profile.html'
-    context_object_name = 'grades'
+    model = Grade
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        time_template = {
+            'morning': [datetime.time(6, 0, 0), datetime.time(12, 59, 59)],
+            'day': [datetime.time(13, 0, 0), datetime.time(17, 59, 59)],
+            'evening': [datetime.time(18, 0, 0), datetime.time(21, 59, 59)],
+            'night': [datetime.time(22, 0, 0), datetime.time(23, 59, 59), datetime.time(0, 0, 0), datetime.time(5, 59, 59)]
+        }
+
+        current_date_time = datetime.datetime.now()
+        current_time = current_date_time.time()
+
+        if time_template['morning'][0] < current_time < time_template['morning'][1]:
+            context['time'] = 'Доброе утро'
+        elif time_template['day'][0] < current_time < time_template['day'][1]:
+            context['time'] = 'Добрый день'
+        elif time_template['evening'][0] < current_time < time_template['evening'][1]:
+            context['time'] = 'Добрый вечер'
+        elif time_template['night'][0] < current_time < time_template['night'][1] or time_template['night'][2] < \
+                current_time < time_template['night'][3]:
+            context['time'] = 'Доброй ночи'
+
+
+        context['grades'] = Grade.objects.all()
+
+        return context
 
 
 class GradeView(ListView):
