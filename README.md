@@ -6,4 +6,6 @@
 1. Поменять DEDUB = False в settings.py
 2. Указать ALLOWED_HOSTS
 3. Поменять настройки БД (если нужно)
-4. в терминале
+4. В терминале:
+pip install -r requirements.txt
+python manage.py runserver
